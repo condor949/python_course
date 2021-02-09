@@ -21,82 +21,100 @@
 #   “ед”: [“шт.”]
 # }
 
-import keyboard
 
-selected = 1
+item_dict = {'name': None,
+             'costs': None,
+             'quantity': None,
+             'units': None}
 
-
-def show_menu():
-    global selected
-    print("\n" * 30)
-    print("Choose an option:")
-    for i in range(1, 5):
-        print("{1} {0}. Do something {0} {2}".format(i, ">" if selected == i else " ", "<" if selected == i else " "))
-
-
-def up():
-    global selected
-    if selected == 1:
-        return
-    selected -= 1
-    show_menu()
-
-
-def down():
-    global selected
-    if selected == 4:
-        return
-    selected += 1
-    show_menu()
-
-
-show_menu()
-keyboard.add_hotkey('up', up)
-keyboard.add_hotkey('down', down)
-keyboard.wait()
-# def input_string_val():
-#     return input('Enter string title')
-#
-#
-# def input_number_val():
-#     num = ''
-#     while type(num) != int:
-#         try:
-#             num = int(input('Enter correct quantity'))
-#             if num < 0:
-#                 num = ''
-#                 continue
-#             return num
-#         except ValueError:
-#             num = ''
-#
-#
-# item_dict = {'name': None,
-#              'costs': None,
-#              'quantity': None,
-#              'units': None}
-#
 # items = [(1, {"название": "компьютер", "цена": 20000, "количество": 5, "eд": "шт."}),
 #          (2, {"название": "принтер", "цена": 6000, "количество": 2, "eд": "шт."}),
 #          (3, {"название": "сканер", "цена": 2000, "количество": 7, "eд": "шт."})]
-# count = 1
-# stat = {}
-#
-# _, test_dict = items[0]
-#
-# for key in test_dict.keys():
-#     stat[key] = []
-# #slow
-# # for _,dict in items:
-# #   for key in stat.keys():
-# #     if (stat[key].count(dict[key]) == 0):
-# #       stat[key].append(dict[key])
-#
-# #faster
-# for _, dict in items:
-#     for key, value in stat.items():
-#         temp = dict[key]
-#         if value.count(temp) == 0:
-#             value.append(temp)
-#
-# print(stat)
+items = []
+
+
+def show_menu():
+    print("\nChoose an option:")
+    print("1. New item")
+    print("2. Get statistic")
+    print("3. Exit")
+
+
+def input_number_val(top_val=None, menu_text='Choose number: '):
+    num = ''
+    while type(num) != int:
+        try:
+            num = int(input(menu_text))
+            if num < 0:
+                num = ''
+                continue
+            if top_val is None:
+                pass
+            elif num > top_val:
+                num = ''
+                continue
+            return num
+        except ValueError:
+            num = ''
+
+
+def enter_new_item():
+    item_dict = {'name': None,
+                 'costs': None,
+                 'quantity': None,
+                 'units': None}
+    for key in item_dict.keys():
+        print(f"Enter item {key}: ")
+        if (key == 'name' or
+                key == 'units'):
+            item_dict[key] = input()
+        else:
+            item_dict[key] = input_number_val()
+    tmpobj = (len(items), item_dict)
+    items.append(tmpobj)
+
+
+def print_stat():
+    try:
+        _, test_dict = items[0]
+    except IndexError:
+        print('Product list is empty!')
+        return
+
+    stat = {}
+
+    for key in test_dict.keys():
+        stat[key] = []
+    # #slow
+    # # for _,dict in items:
+    # #   for key in stat.keys():
+    # #     if (stat[key].count(dict[key]) == 0):
+    # #       stat[key].append(dict[key])
+
+    # faster
+    for _, dict in items:
+        for key, value in stat.items():
+            temp = dict[key]
+            if value.count(temp) == 0:
+                value.append(temp)
+    print(stat)
+
+
+def chek_command(command):
+    if command == 3:
+        exit()
+    elif command == 2:
+        print_stat()
+    else:
+        enter_new_item()
+
+
+def main():
+    command = 0
+    while command != 3:
+        show_menu()
+        chek_command(input_number_val(3))
+
+
+if __name__ == '__main__':
+    main()
