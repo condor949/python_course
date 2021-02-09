@@ -21,7 +21,7 @@ while type(a) != int:
         b = int(a)
         for i in range(len(lst)):
             if b >= lst[i]:
-                lst.insert(i, b)
+                lst.insert(i, float(b))
                 print(lst)
                 break
     except ValueError:
