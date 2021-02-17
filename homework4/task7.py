@@ -5,3 +5,19 @@
 # Функция отвечает за получение факториала числа,
 # а в цикле необходимо выводить только первые n чисел, начиная с 1! и до n!.
 # Подсказка: факториал числа n — произведение чисел от 1 до n. Например, факториал четырёх 4! = 1 * 2 * 3 * 4 = 24
+
+from math import factorial
+
+
+def gen(n):
+    for x in range(1, n+1):
+        yield factorial(x)
+
+
+def main():
+    for x in gen(int(input('Enter number: '))):
+        print(x, end=' ')
+
+
+if __name__ == '__main__':
+    main()
