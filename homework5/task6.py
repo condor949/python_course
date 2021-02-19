@@ -12,8 +12,11 @@
 # Пример словаря:
 #
 # {“Информатика”: 170, “Физика”: 40, “Физкультура”: 30}
-import re
+from re import findall
+
+new_dict = {}
 
 with open("task6.txt") as f:
-   # w= list[re.findall("\d+",'Информатика: 100(л) 50(пр) 20(лаб)'), re.findall("\w+", 'Информатика: 100(л) 50(пр) 20(лаб)')]
-   print(re.findall("\w+: \d+", 'Информатика: 100(л) 50(пр) 20(лаб)')[0])
+    new_dict.update({findall("\w+", findall("\w+", x)[0])[0] :
+                        sum(map(int, findall("\d+", x))) for x in f})
+    print(new_dict)

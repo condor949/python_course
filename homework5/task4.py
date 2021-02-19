@@ -12,7 +12,7 @@ from re import findall
 
 counter = {"One": "Один", "Two": "Два", "Three": "Три", "Four": "Четыре"}
 
-with open("task4.txt") as f1, open("task4-1.txt", "wt", encoding="UTF-8") as f2:
+with open("task4.txt") as f1, open("task4-1.txt", "wt", encoding='utf-8') as f2:
     for x in f1:
         for key, val in counter.items():
             line = findall('\w+', x)
