@@ -17,27 +17,31 @@ import unittest
 
 class TrafficLight:
     __colors = cycle((str, timer) for str, timer in {'red': 7, 'yellow': 2, 'green': 10}.items())
-    cur_color = None
+    __cur_color = None
 
     def running(self):
         tmp = next(TrafficLight.__colors)
+        TrafficLight.__cur_color = tmp[0]
         print(tmp[0])
         return tmp
 
+    def get_cur_color(self):
+        return TrafficLight.__cur_color
+
+
 def destroy_TrafficLight_make_chaos_AHAHAHAH():
-    next(TrafficLight._TrafficLight__colors)
+    TrafficLight._TrafficLight__cur_color = next(TrafficLight._TrafficLight__colors)[0]
 
 
 class TestTrafficLight(unittest.TestCase):
 
     def test_color(self):
-        t = Timer(20.0, destroy_TrafficLight_make_chaos_AHAHAHAH)
-        t.start()
+        Timer(20.0, destroy_TrafficLight_make_chaos_AHAHAHAH).start()
         tl = TrafficLight()
         for _ in range(15):
             color, timer = tl.running()
             sleep(timer)
-            self.assertEqual(color, TrafficLight.cur_color, "something wrong")
+            self.assertEqual(color, tl.get_cur_color(), "Wrong traffic light color!")
 
 
 if __name__ == '__main__':
