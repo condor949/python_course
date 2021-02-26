@@ -38,12 +38,10 @@ class Coat(Clothes):
 
 
 class Costume(Clothes):
-    
+
     @property
     def consumption(self):
         return (2 * self.param + 0.3) / 100
 
 
-coat = Coat(58)
-costume = Costume(240)
-print(coat + costume)
+print(Coat(46) + Costume(170))
