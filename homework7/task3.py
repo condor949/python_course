@@ -24,8 +24,28 @@
 # Или, количество ячеек клетки равняется 15, количество ячеек в ряду — 5.
 # Тогда метод make_order() вернет строку: *****\n*****\n*****.
 
-class organic_cell:
+class OrganicCell:
+    count = 0
 
-    def __init__(self):
-        pass
-    
+    def __init__(self, count=1):
+        self.count = count
+
+    def __add__(self, other):
+        return OrganicCell(other.count + self.count)
+
+    def __sub__(self, other):
+        return OrganicCell(self.count - other.count) if self.count > other.count else \
+            print("impossible to get the difference")
+
+    def __mul__(self, other):
+        return OrganicCell(other.count * self.count)
+
+    def __truediv__(self, other):
+        return OrganicCell(int(self.count / other.count))
+
+    def make_order(self, number_in_a_row):
+        return str().join([('*' * number_in_a_row) + '\n' for _ in range(self.count // number_in_a_row)]) + \
+               '\n' + '*' * (self.count % number_in_a_row)
+
+
+print(OrganicCell(12).make_order(4))

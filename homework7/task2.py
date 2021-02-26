@@ -17,6 +17,7 @@ from abc import ABC, abstractmethod
 
 
 class Clothes(ABC):
+
     def __init__(self, param):
         self.param = param
 
@@ -37,6 +38,7 @@ class Coat(Clothes):
 
 
 class Costume(Clothes):
+    
     @property
     def consumption(self):
         return (2 * self.param + 0.3) / 100

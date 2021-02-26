@@ -30,9 +30,14 @@ class Matrix:
         return '\n'.join(map(str, c))
 
 
-matrx1 = Matrix(a)
-matrx2 = Matrix(b)
+def main():
+    m1 = Matrix(a)
+    m2 = Matrix(b)
 
-print(matrx1, '\n')
-print(matrx2, '\n')
-print(matrx1 + matrx2)
+    print(m1, '\n')
+    print(m2, '\n')
+    print(m1 + m2)
+
+
+if __name__ == '__main__':
+    main()
