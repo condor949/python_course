@@ -3,7 +3,8 @@
 # Проверьте его работу на данных, вводимых пользователем.
 # При вводе пользователем нуля в качестве делителя
 # программа должна корректно обработать эту ситуацию и не завершиться с ошибкой.
-from  exceptions import ZeroDivision
+from exceptions import ZeroDivision
+
 
 class Division:
     def __init__(self, val):
@@ -14,6 +15,7 @@ class Division:
             raise ZeroDivision("You can not division on zero")
         else:
             return self.val/other
+
 
 def main():
     try:

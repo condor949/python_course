@@ -12,14 +12,16 @@ class Data:
                'month': None,
                'year': None}
 
+    raw_epoch_time = '01-01-1973'
+
     def __init__(self, data_str):
         tmp = data_str.split('-')
         for num, key in enumerate(self.content.keys()):
             self.content[key] = int(tmp[num])
 
     @classmethod
-    def extract(cls, data_str):
-        return [int(x) for x in data_str.split('-')]
+    def extract(cls):
+        return [int(x) for x in cls.raw_epoch_time.split('-')]
 
     @staticmethod
     def validate(data_str):
@@ -36,9 +38,9 @@ class Data:
 
 
 def main():
-    v = Data('15-04-1996')
+    v = Data('20-12-2012')
     print(v.content)
-    print(v.extract('20-12-2012'))
+    print(v.extract())
     v.validate('32-12-3001')
 
 

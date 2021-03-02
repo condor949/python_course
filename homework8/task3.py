@@ -11,15 +11,12 @@
 # и вносить его в список, только если введено число.
 # Класс-исключение должен не позволить пользователю ввести текст (не число)
 # и отобразить соответствующее сообщение. При этом работа скрипта не должна завершаться.
-
-class NotDigit(ValueError):
-    def __init__(self, value):
-        self.value = value
+from exceptions import NotDigit
 
 
 class DigitCheck:
-    @classmethod
-    def check(cls, str):
+    @staticmethod
+    def check(str):
         try:
             return int(str)
         except ValueError:
